@@ -30,22 +30,22 @@ int main(){
         if (hardware_read_order(1,HARDWARE_ORDER_INSIDE)){
             hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
         }
-        if (hardware_read_floor_sensor(0) && (current_floor=!0)){
+        if (hardware_read_floor_sensor(0) && (current_floor != 0)){
             current_floor = 0;
             printf("%d", current_floor+1);
             printf("\n");
         }
-        if (hardware_read_floor_sensor(1) && (current_floor=!1)){
+        if (hardware_read_floor_sensor(1) && (current_floor != 1)){
             current_floor = 1;
             printf("%d", current_floor+1);
             printf("\n");
         }
-        if (hardware_read_floor_sensor(2) && (current_floor=!2)){
+        if (hardware_read_floor_sensor(2) && (current_floor != 2)){
             current_floor = 2;
             printf("%d", current_floor+1);
             printf("\n");
         }
-        if (hardware_read_floor_sensor(3) && (current_floor=!3)){
+        if (hardware_read_floor_sensor(3) && (current_floor != 3)){
             current_floor = 3;
             printf("%d", current_floor+1);
             printf("\n");
