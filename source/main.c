@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "hardware.h"
+#include "elevator_logic.h"
 
 int main(){
     int error = hardware_init();
@@ -14,7 +15,8 @@ int main(){
 
     hardware_command_movement(HARDWARE_MOVEMENT_UP);
 
-    int current_floor = 0;
+    floor_numbers current_floor = FLOOR_1;
+    floor_numbers *current_floor_pointer = &current_floor;
     while(1){
         
         if(hardware_read_stop_signal()){
@@ -30,27 +32,9 @@ int main(){
         if (hardware_read_order(1,HARDWARE_ORDER_INSIDE)){
             hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
         }
-        if (hardware_read_floor_sensor(0) && (current_floor != 0)){
-            current_floor = 0;
-            printf("%d", current_floor+1);
-            printf("\n");
-        }
-        if (hardware_read_floor_sensor(1) && (current_floor != 1)){
-            current_floor = 1;
-            printf("%d", current_floor+1);
-            printf("\n");
-        }
-        if (hardware_read_floor_sensor(2) && (current_floor != 2)){
-            current_floor = 2;
-            printf("%d", current_floor+1);
-            printf("\n");
-        }
-        if (hardware_read_floor_sensor(3) && (current_floor != 3)){
-            current_floor = 3;
-            printf("%d", current_floor+1);
-            printf("\n");
-        }
-            
+        
+       current_floor_reader(current_floor_pointer);
+    
         if(hardware_read_floor_sensor(0)){
             hardware_command_movement(HARDWARE_MOVEMENT_UP);
         }
@@ -59,3 +43,4 @@ int main(){
         }
     }
 }
+
