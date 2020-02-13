@@ -12,11 +12,7 @@
 #include <stdlib.h>
 #include "hardware.h"
 
-typedef enum{
-    FLOOR_1,FLOOR_2,FLOOR_3,FLOOR_4
-}floor_numbers;
 
-void current_floor_reader();
 
 
 #endif /* elevator_logic_h */

@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "hardware.h"
 #include "elevator_logic.h"
+#include "floor_sensor_logic.h"
 
 int main(){
     int error = hardware_init();
@@ -15,9 +16,13 @@ int main(){
 
     hardware_command_movement(HARDWARE_MOVEMENT_UP);
 
-    floor_numbers current_floor = FLOOR_1;
-    floor_numbers *current_floor_pointer = &current_floor;
+   //int current_floor = 0;
+   //int * current_floor_pointer = &current_floor;
+    hardware_command_floor_indicator_on(2);
     while(1){
+        //check_current_floor(current_floor_pointer);
+   
+
         
         if(hardware_read_stop_signal()){
             hardware_command_movement(HARDWARE_MOVEMENT_STOP);
@@ -33,7 +38,7 @@ int main(){
             hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
         }
         
-       current_floor_reader(current_floor_pointer);
+       
     
         if(hardware_read_floor_sensor(0)){
             hardware_command_movement(HARDWARE_MOVEMENT_UP);
