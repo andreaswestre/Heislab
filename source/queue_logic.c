@@ -11,4 +11,6 @@ order_type order_array[4];
  order_type * next_floor_pointer = &order_array[1];
  order_type * end_floor_pointer = &order_array[0];
 
-
+void manage_order_array(order_type * next_floor_pointer,order_type){
+    
+}

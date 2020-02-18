@@ -8,8 +8,7 @@
 #ifndef queue_logic_h
 #define queue_logic_h
 
-#include <stdio.h>
-#include <stdlib.h>
+
 
 typedef enum{
     UP, DOWN, OUT
