@@ -14,10 +14,10 @@ typedef enum{
     UP, DOWN, OUT
 }order_type;
 
+static order_type * order_array;
 
-static order_type order_array[4];
-static order_type * next_floor_pointer;
-static order_type * end_floor_pointer;
-static void 
 
+order_array = malloc(4*sizeof(order_type));
+static order_type * next_floor_pointer = order_array+1;
+static order_type * end_floor_pointer = order_array;
 #endif /* queue_logic_h */
