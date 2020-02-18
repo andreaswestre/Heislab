@@ -14,8 +14,13 @@ int main(){
     printf("=== Example Program ===\n");
     printf("Press the stop button on the elevator panel to exit\n");
 
-    hardware_command_movement(HARDWARE_MOVEMENT_UP);
-
+    hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
+    while(1){
+        if (hardware_read_floor_sensor(0)){
+            break;
+        }
+    }
+   hardware_command_movement(HARDWARE_MOVEMENT_STOP)
    int current_floor = 0;
    int * current_floor_pointer = &current_floor;
     hardware_command_floor_indicator_on(2);
