@@ -11,6 +11,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+void setTimeout();
+
+void open_door();
 
 
 
