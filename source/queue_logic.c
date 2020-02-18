@@ -9,13 +9,14 @@
 
 
 order_status order_array[4];
- int end_floor = 0;
+
 
 void set_end_floor(int *end_floor_pointer, order_status *order_pointer, int current_floor){
-    for(int i = 0; i>4; i++){
-        if((order_pointer[current_floor].UP==1) ||
-           (order_pointer[current_floor].DOWN==1) ||
-           (order_pointer[current_floor].OUT==1)){
+    for(int i = 0; i<4; i++){
+
+        if((order_pointer[i].UP==1) ||
+           (order_pointer[i].DOWN==1) ||
+           (order_pointer[i].OUT==1)){
             if((i>*end_floor_pointer) &&
                (*end_floor_pointer>=current_floor)){
                 *end_floor_pointer = i;
@@ -32,18 +33,25 @@ void add_orders(order_status *add_order_pointer){
     for (int i = 0; i<4; i++) {
         if(hardware_read_order(i,HARDWARE_ORDER_UP)){
             add_order_pointer[i].UP = 1;
+           // printf("Order UP: %d", i);
         }
         if(hardware_read_order(i,HARDWARE_ORDER_DOWN)){
             add_order_pointer[i].DOWN = 1;
+            //printf("Order DOWN: %d", i);
+
         }
         if(hardware_read_order(i,HARDWARE_ORDER_INSIDE)){
             add_order_pointer[i].OUT = 1;
+            //printf("Order OUT: %d", i);
+
         }
     }
+
+
 }
 
 
-int stop_or_continue(int current_floor,int end_floor, order_status *order_pointer){
+int stop_or_continue(int current_floor,int end_floor, order_status *order_pointer){//Returns 1 if the elevator should stop
     if((order_pointer[current_floor].UP==1) && (end_floor>=current_floor)){
         return 1;
     }

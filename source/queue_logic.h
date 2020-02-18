@@ -8,7 +8,7 @@
 #ifndef queue_logic_h
 #define queue_logic_h
 #include "hardware.h"
-
+#include <stdio.h>
 
 
 typedef struct{
@@ -20,7 +20,7 @@ typedef struct{
 
 order_status order_array[4];
 
-int end_floor;
+
 
 void add_orders(order_status *add_order_pointer);
 
