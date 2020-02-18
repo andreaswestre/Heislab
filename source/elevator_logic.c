@@ -7,29 +7,37 @@
 
 #include "elevator_logic.h"
 
-
-/*void current_floor_reader(){
-    if (hardware_read_floor_sensor(0) && (*current_floor_pointer != 0)){
-        *current_floor_pointer = 0;
-        printf("Currently in floor 1");
-        printf("\n");
+/*
+void setTimeout()
+{
+    int milliseconds = 3000;
+    // If milliseconds is less or equal to 0
+    // will be simple return from function without throw error
+    if (milliseconds <= 0) {
+        fprintf(stderr, "Count milliseconds for timeout is less or equal to 0\n");
+        return;
     }
-    if (hardware_read_floor_sensor(1) && (*current_floor_pointer != 1)){
-    *current_floor_pointer = 1;
-    printf("Currently in floor 2");
-    printf("\n");
-    } 
     
-    if (hardware_read_floor_sensor(2) && (*current_floor_pointer != 2)){
-    *current_floor_pointer = 2;
-    printf("Currently in floor 3");
-    printf("\n");
-    }
-    if (hardware_read_floor_sensor(3) && (*current_floor_pointer != 3)){
-    *current_floor_pointer = 3;
-    printf("Currently in floor 4");
-    printf("\n");
-    }
-}*/
+    // a current time of milliseconds
+    int milliseconds_since = clock() * 1000 / CLOCKS_PER_SEC;
+    
+    // needed count milliseconds of return from this timeout
+    int end = milliseconds_since + milliseconds;
+    
+    // wait while until needed time comes
+    do {
+        milliseconds_since = clock() * 1000 / CLOCKS_PER_SEC;
+        
+    } while (milliseconds_since <= end);
+    
+}
 
- 
+void open_door(){
+    printf("Door is open");
+    setTimeout();
+    printf("Door is closed");
+    
+    
+}
+*/
+
