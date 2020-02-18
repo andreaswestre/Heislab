@@ -15,10 +15,9 @@ typedef enum{
     UP, DOWN, OUT
 }order_type;
 
-static order_type * order_array;
+order_type order_array[4];
 
-
-static order_type * next_floor_pointer;
-static order_type * end_floor_pointer;
+order_type * next_floor_pointer;
+order_type * end_floor_pointer;
 void manage_order_array(order_type * next_floor_pointer,order_type);
 #endif /* queue_logic_h */
