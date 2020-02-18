@@ -16,11 +16,11 @@ int main(){
 
     hardware_command_movement(HARDWARE_MOVEMENT_UP);
 
-   int current_floor = 0;
-   int * current_floor_pointer = &current_floor;
+   //int current_floor = 0;
+   //int * current_floor_pointer = &current_floor;
     hardware_command_floor_indicator_on(2);
     while(1){
-        check_current_floor(current_floor_pointer);
+        //check_current_floor(current_floor_pointer);
    
 
         
