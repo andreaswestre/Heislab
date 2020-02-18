@@ -7,7 +7,7 @@
 
 #include "elevator_logic.h"
 
-/*
+
 void setTimeout()
 {
     int milliseconds = 3000;
@@ -39,5 +39,5 @@ void open_door(){
     
     
 }
-*/
+
 
