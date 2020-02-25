@@ -5,7 +5,7 @@
 //  Created by Aksel Vaaler on 13/02/2020.
 //
 
-#include "elevator_logic.h"
+#include "Door_logic.h"
 
 
 void setTimeout()

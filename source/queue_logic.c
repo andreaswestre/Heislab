@@ -10,6 +10,8 @@
 
 order_status order_array[4];
 
+int end_floor = 0;
+int * end_floor_pointer = &end_floor;
 
 void set_end_floor(int *end_floor_pointer, order_status *order_pointer, int current_floor){
     for(int i = 0; i<4; i++){

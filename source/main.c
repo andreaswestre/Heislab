@@ -22,21 +22,11 @@ hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
     }
    hardware_command_movement(HARDWARE_MOVEMENT_STOP);
 
-   int current_floor = 0;
-   int * current_floor_pointer = &current_floor;
-   int end_floor = 0;
-   int * end_floor_pointer = &end_floor;
 
-    //open_door();
     while(1){
-        /*while(hardware_read_obstruction_signal()){
-            add_orders(order_array);
-            hardware_command_movement(HARDWARE_MOVEMENT_STOP);
 
-        }*/
         add_orders(order_array);
         check_current_floor(current_floor_pointer);
-        //printf("%d",current_floor);
 
         if(end_floor > current_floor){
                         hardware_command_movement(HARDWARE_MOVEMENT_UP);
@@ -47,25 +37,8 @@ hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
         if(end_floor == current_floor){
                         hardware_command_movement(HARDWARE_MOVEMENT_STOP);
         }
-        /*switch (end_floor - current_floor)
-        {
-        case 0:
-            hardware_command_movement(HARDWARE_MOVEMENT_STOP);
-            break;
-        
-        case 1 || 2 || 3:
-            hardware_command_movement(HARDWARE_MOVEMENT_UP);
-            break;
-
-               
-        default:
-        hardware_command_movement(HARDWARE_MOVEMENT_DOWN); 
-            break;
-        }*/
-        
+     
         if(stop_or_continue(current_floor,end_floor,order_array)){
-            printf("Curren floor %d \n",current_floor );
-            printf("ENDFLOOR %d \n",end_floor );
             remove_orders(current_floor,order_array);
             open_door();
         }

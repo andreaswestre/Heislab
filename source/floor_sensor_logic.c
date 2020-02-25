@@ -8,6 +8,10 @@
 #include "floor_sensor_logic.h"
 
 
+int current_floor = 0;
+
+int * current_floor_pointer = &current_floor;
+
 void check_current_floor(int * current_floor_pointer){
 if(hardware_read_floor_sensor(0) && (*current_floor_pointer!=0)){
     *current_floor_pointer = 0;
