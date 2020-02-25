@@ -13,7 +13,10 @@ order_status order_array[4];
 int end_floor = 0;
 int * end_floor_pointer = &end_floor;
 
-void set_end_floor(int *end_floor_pointer, order_status *order_array_pointer, int current_floor){
+int current_direction = 0;
+int * current_direction_pointer = &current_direction;
+
+void set_end_floor(int *end_floor_pointer, order_status *order_array_pointer, int current_floor, int current_direction){
     for(int i = 0; i<4; i++){
 
         if((order_array_pointer[i].UP==1) ||
@@ -23,15 +26,51 @@ void set_end_floor(int *end_floor_pointer, order_status *order_array_pointer, in
                 *end_floor_pointer = i;
             }
             else if((i>*end_floor_pointer) &&
-               (*end_floor_pointer>=current_floor)){
+               (//*end_floor_pointer>=current_floor
+               current_direction>=0)){
                 *end_floor_pointer = i;
             }
             else if((i<*end_floor_pointer) &&
-               (*end_floor_pointer<=current_floor)){
+               (//*end_floor_pointer<=current_floor
+               current_direction<=0)){
                 *end_floor_pointer = i;
             }
         }
     }
+    printf("%d\n", current_direction);
+    printf("%d\n", end_floor);
+}
+
+void set_current_direction(int end_floor, int current_floor, int * current_direction_pointer){
+    if (end_floor > current_floor){
+        *current_direction_pointer = 1;
+    }
+    else if(end_floor<current_floor){
+        *current_direction_pointer = -1;
+    }
+    else if(end_floor == current_floor){
+        *current_direction_pointer = 0;
+    } 
+}
+
+int set_movement(int current_direction){
+    if(current_direction==1){    
+        printf("set movement kjører");
+
+
+        hardware_command_movement(HARDWARE_MOVEMENT_UP);
+        return 1;
+    }
+    else if(current_direction == -1){
+        hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
+        return 1;
+    }
+    else if(current_direction == 0){
+        hardware_command_movement(HARDWARE_MOVEMENT_STOP);
+        return 0;
+    }
+    printf("dette er feiul");
+    return 0;
 }
 
 void add_orders(order_status *order_array_pointer){
@@ -57,15 +96,12 @@ void add_orders(order_status *order_array_pointer){
 
 int stop_or_continue(int current_floor,int end_floor, order_status *order_array_pointer){//Returns 1 if the elevator should stop
     if((order_array_pointer[current_floor].UP==1) && (end_floor>=current_floor)){
-        printf("a\n");
         return 1;
     }
     else if((order_array_pointer[current_floor].DOWN==1) && (end_floor<=current_floor)){
-        printf("b\n");
         return 1;
     }
     else if(order_array_pointer[current_floor].INSIDE==1){
-        printf("c\n");
         return 1;
     }
     else{

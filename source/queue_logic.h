@@ -29,6 +29,10 @@ int end_floor;
  */
 int * end_floor_pointer;
 
+int current_direction;
+
+int * current_direction_pointer;
+
 /**
  *@brief adds orders to @c order_array.
  *@param order_array_pointer pointer to @c order_status.
@@ -41,8 +45,11 @@ void add_orders(order_status *order_array_pointer);
  *@param order_array_pointer pointer to the order array.
  *@param current_floor The current floor.
  */
-void set_end_floor(int *end_floor_pointer, order_status *order_array_pointer,  int current_floor);
+void set_end_floor(int *end_floor_pointer, order_status *order_array_pointer,  int current_floor, int current_direction);
 
+void set_current_direction(int end_floor, int current_floor, int * current_direction_pointer);
+
+int set_movement(int current_direction);
 /**
  *@brief Stops the elevator on floors with current orders.
  *@param current_floor The current floor.

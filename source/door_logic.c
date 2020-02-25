@@ -30,18 +30,18 @@ void setTimeout()
                 add_orders(order_array);
         
     } while (milliseconds_since <= end);
-    if(hardware_read_obstruction_signal()){
+    while(hardware_read_obstruction_signal()){
         setTimeout();
     }
 }
 
 void open_door(){
+    if(hardware_read_floor_sensor(0) || hardware_read_floor_sensor(1) || hardware_read_floor_sensor(2) || hardware_read_floor_sensor(3)  ){
     hardware_command_movement(HARDWARE_MOVEMENT_STOP);
     hardware_command_door_open(1);
     setTimeout();
     hardware_command_door_open(0);
-    printf("Door is closed");
-    
+    }
     
 }
 
