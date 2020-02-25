@@ -58,6 +58,6 @@ int stop_or_continue(int current_floor, int end_floor, order_status *order_array
  */
 void remove_orders(int current_floor, order_status *order_array_pointer);
 
-//void set_order_lights(order_status order_array);
+void set_order_lights(order_status *order_array_pointer);
 #endif /* queue_logic_h */
 

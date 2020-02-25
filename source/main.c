@@ -26,33 +26,42 @@ hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
     while(1){
 
         add_orders(order_array);
-        check_current_floor(current_floor_pointer);
-
-        if(end_floor > current_floor){
+        
+        if (end_floor == -1) {
+            hardware_command_movement(HARDWARE_MOVEMENT_STOP);
+        }else if(end_floor > current_floor){
                         hardware_command_movement(HARDWARE_MOVEMENT_UP);
         }
-    if(end_floor < current_floor){
+        else if(end_floor < current_floor){
                         hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
         }
-        if(end_floor == current_floor){
+        else if(end_floor == current_floor){
                         hardware_command_movement(HARDWARE_MOVEMENT_STOP);
+                            if(order_array[current_floor].UP || order_array[current_floor].INSIDE || order_array[current_floor].DOWN) {
+                                remove_orders(current_floor,order_array);
+                                open_door();
+                            }
+                        
+                        
         }
-     
+        
+
+     if(check_current_floor(current_floor_pointer)){
         if(stop_or_continue(current_floor,end_floor,order_array)){
             remove_orders(current_floor,order_array);
             open_door();
         }
-
+     }
+     
          set_end_floor(end_floor_pointer,order_array,current_floor);
 
-        if(hardware_read_stop_signal()){
+        while(hardware_read_stop_signal()){
+            
             hardware_command_movement(HARDWARE_MOVEMENT_STOP);
-            for(int i =0; i<4; i++){
-            printf("%d", order_array[i].UP);
+            for (int i = 0; i<4; i++){
+                remove_orders(i,order_array);
             }
-            printf("\n%d", end_floor);
-            break;
-        }
-       
+            end_floor = -1;
     }
+}
 }
