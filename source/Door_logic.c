@@ -5,7 +5,7 @@
 //  Created by Aksel Vaaler on 13/02/2020.
 //
 
-#include "Door_logic.h"
+#include "door_logic.h"
 
 
 void setTimeout()
@@ -30,7 +30,9 @@ void setTimeout()
                 add_orders(order_array);
         
     } while (milliseconds_since <= end);
-    
+    if(hardware_read_obstruction_signal()){
+        setTimeout();
+    }
 }
 
 void open_door(){

@@ -4,7 +4,7 @@
  */
 #ifndef queue_logic_h
 #define queue_logic_h
-
+#include "hardware.h"
 /**
  *@brief Types of order for each floor. Used in @c order_array.
  */

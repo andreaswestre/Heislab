@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "hardware.h"
-#include "elevator_logic.h"
+#include "door_logic.h"
 #include "floor_sensor_logic.h"
 
 int main(){
@@ -10,7 +10,7 @@ int main(){
         fprintf(stderr, "Unable to initialize hardware\n");
         exit(1);
     }
-
+ 
     printf("=== Example Program ===\n");
     printf("Press the stop button on the elevator panel to exit\n");
 
