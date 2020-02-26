@@ -36,8 +36,9 @@ int * current_direction_pointer;
 /**
  *@brief adds orders to @c order_array.
  *@param order_array_pointer pointer to @c order_status.
+ *@return 1 if new order added, 0 otherwise.
  */
-void add_orders(order_status *order_array_pointer);
+int add_orders(order_status *order_array_pointer);
 
 /**
  *@brief Updates @c end_floor.

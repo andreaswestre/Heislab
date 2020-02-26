@@ -37,8 +37,6 @@ void set_end_floor(int *end_floor_pointer, order_status *order_array_pointer, in
             }
         }
     }
-    printf("%d\n", current_direction);
-    printf("%d\n", end_floor);
 }
 
 void set_current_direction(int end_floor, int current_floor, int * current_direction_pointer){
@@ -73,24 +71,26 @@ int set_movement(int current_direction){
     return 0;
 }
 
-void add_orders(order_status *order_array_pointer){
+int  add_orders(order_status *order_array_pointer){
+    int new_order = 0;
     for (int i = 0; i<4; i++) {
         if(hardware_read_order(i,HARDWARE_ORDER_UP)){
             order_array_pointer[i].UP = 1;
-           // printf("Order UP: %d", i);
+            new_order = 1;
         }
         if(hardware_read_order(i,HARDWARE_ORDER_DOWN)){
             order_array_pointer[i].DOWN = 1;
-            //printf("Order DOWN: %d", i);
+            new_order = 1;
 
         }
         if(hardware_read_order(i,HARDWARE_ORDER_INSIDE)){
             order_array_pointer[i].INSIDE = 1;
-            //printf("Order INSIDE: %d", i);
+            new_order = 1;
 
         }
     }
     set_order_lights(order_array);
+    return new_order;
 }
 
 
