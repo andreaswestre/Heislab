@@ -33,7 +33,7 @@ void set_end_floor(int *end_floor_pointer, order_status *order_array_pointer, in
     }
 }
 
-void set_current_direction(int end_floor, int current_floor, int * current_direction_pointer){
+void set_current_direction(int end_floor, float current_floor, int * current_direction_pointer){
     if (end_floor > current_floor){
         *current_direction_pointer = 1;
     }
@@ -100,7 +100,7 @@ int  add_orders(order_status *order_array_pointer){
 }
 
 
-int stop_at_floor(int current_floor,int end_floor, order_status *order_array_pointer){//Returns 1 if the elevator should stop
+int stop_at_floor(float current_floor,int end_floor, order_status *order_array_pointer){//Returns 1 if the elevator should stop
     if((order_array_pointer[current_floor].UP==1) && (end_floor>=current_floor)){
         return 1;
     }
@@ -115,7 +115,7 @@ int stop_at_floor(int current_floor,int end_floor, order_status *order_array_poi
     }
 }
 
-void remove_orders(int current_floor, order_status *order_array_pointer){
+void remove_orders(float current_floor, order_status *order_array_pointer){
     order_array_pointer[current_floor].UP = 0;
     order_array_pointer[current_floor].DOWN = 0;
     order_array_pointer[current_floor].INSIDE = 0;

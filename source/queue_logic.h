@@ -67,7 +67,7 @@ void set_end_floor(int *end_floor_pointer, order_status *order_array_pointer, in
  *@param current_floor the current floor.
  *@param current_direction_pointer pointer to current direction.
  */
-void set_current_direction(int end_floor, int current_floor, int * current_direction_pointer);
+void set_current_direction(int end_floor, float current_floor, int * current_direction_pointer);
 
 /**
  *@brief sets movement direction of elevator to up, down or standstill.
@@ -87,14 +87,14 @@ void set_above_or_below(int * above_or_below_pointer, int current_direction);
  *@param end_floor The current end floor.
  *@param order_array_pointer pointer to the order array.
  */
-int stop_at_floor(int current_floor, int end_floor, order_status *order_array_pointer);
+int stop_at_floor(float current_floor, int end_floor, order_status *order_array_pointer);
 
 /**
  *@brief Removes orders on current floor if elevator has stopped.
  *@param current_floor The current floor.
  *@param order_array_pointer pointer to the order array.
  */
-void remove_orders(int current_floor, order_status *order_array_pointer);
+void remove_orders(float current_floor, order_status *order_array_pointer);
 
 /**
  *@brief Sets order lights on buttons corresponding to unadressed orders.

@@ -69,18 +69,16 @@ hardware_command_movement(HARDWARE_MOVEMENT_DOWN);    //When program starts, ele
     if(hardware_read_stop_signal()){                       //enter emergency stop mode
         hardware_command_movement(HARDWARE_MOVEMENT_STOP);
         int leave_stop_mode = 0;                           //leaves stop mode loop when set to 1.
-        double stop_position = current_floor;
         end_floor = current_floor;             //set to current floor or current floor+-0.5 if above or below.
-        if(current_direction == 1 || current_direction == -1){                             //checks if elevator was moving before emergency stop
-            switch (above_or_below) {
-                case 1:
-                    stop_position+= 0.5;
+        if(current_direction && (current_floor*10)%2 == 0){                             //checks if elevator was moving before emergency stop
+            switch (above_or_below) {                                                   //In addition, if current floor already has been incremented +-0.5
+                case 1:                                                                 //it will not be further incremented before it is reset by a floor sensor.
+                    current_floor+=0.5;
                     break;
                 case 0:
-                    stop_position-= 0.5;
+                    current_floor-= 0.5;
                     break;
                 }
-                printf("%f", stop_position);
             }
         else if(current_direction == 0){
             hardware_command_door_open(1);
@@ -90,29 +88,25 @@ hardware_command_movement(HARDWARE_MOVEMENT_DOWN);    //When program starts, ele
                 remove_orders(i,order_array);
             }
             while(!hardware_read_stop_signal()){
-                if(stop_position==current_floor){           // if stationory on floor can safely leave stop mode
+                if(current_direction == 0){           // if stationory on floor can safely leave stop mode
                     leave_stop_mode = 1;
                     open_door();
                     break;
                 }//endif(stop_position==current_floor)
                 if(add_orders(order_array)){                //if between floors, must set direction depending on first new order before leaving stop mode.
                     set_end_floor(end_floor_pointer,order_array, current_direction);
-                    if(end_floor>stop_position){
+                    if(end_floor>current_floor){
                         current_direction = 1;
-                        current_floor-=1;
-                        above_or_below = 1;
                         set_movement(current_direction);
                         leave_stop_mode = 1;
                         break;
-                    }//endif(end_floor>stop_position)
-                    else if(end_floor<stop_position){
+                    }//endif(end_floor>current_floor)
+                    else if(end_floor<current_floor){
                         current_direction = -1;
-                        current_floor += 1;
-                        above_or_below = 0;
                         set_movement(current_direction);
                         leave_stop_mode = 1;
                         break;
-                    }//end else if(end_floor<stop_position)
+                    }//end else if(end_floor<current_floor)
                    
                 }//endif(add_orders(order_array))
                 if(leave_stop_mode){

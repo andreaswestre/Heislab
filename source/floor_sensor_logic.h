@@ -13,13 +13,13 @@
 /**
  *@brief The current floor.
  */
-int current_floor;
+float current_floor;
 
 
 /**
  *Pointer to the current floor.
  */
-int * current_floor_pointer;//= &current_floor;
+float * current_floor_pointer;//= &current_floor;
 
 /**
  *@checks the current floor and sets the current floor variable.
