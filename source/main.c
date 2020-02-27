@@ -3,6 +3,7 @@
 #include "hardware.h"
 #include "door_logic.h"
 #include "floor_sensor_logic.h"
+#include "queue_logic.h"
 
 int main(){
     int error = hardware_init();

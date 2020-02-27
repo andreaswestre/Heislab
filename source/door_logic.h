@@ -10,7 +10,6 @@
 #include <stdlib.h>
 #include <time.h>
 #include "hardware.h"
-#include "queue_logic.h"
 /**
  *@brief Starts a timer loop of 3 seconds.
  */
