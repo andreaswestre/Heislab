@@ -16,23 +16,18 @@ int * end_floor_pointer = &end_floor;
 int current_direction = 0;
 int * current_direction_pointer = &current_direction;
 
-void set_end_floor(int *end_floor_pointer, order_status *order_array_pointer, int current_floor, int current_direction){
-    for(int i = 0; i<4; i++){
+int above_or_below = 0;
+int * above_or_below_pointer = &above_or_below;
 
+void set_end_floor(int *end_floor_pointer, order_status *order_array_pointer, int current_direction){
+    for(int i = 0; i<4; i++){
         if((order_array_pointer[i].UP==1) ||
            (order_array_pointer[i].DOWN==1) ||
            (order_array_pointer[i].INSIDE==1)){
-            if(*end_floor_pointer == -1){
+            if((i>*end_floor_pointer) && (current_direction>=0)){
                 *end_floor_pointer = i;
             }
-            else if((i>*end_floor_pointer) &&
-               (//*end_floor_pointer>=current_floor
-               current_direction>=0)){
-                *end_floor_pointer = i;
-            }
-            else if((i<*end_floor_pointer) &&
-               (//*end_floor_pointer<=current_floor
-               current_direction<=0)){
+            else if((i<*end_floor_pointer) && (current_direction<=0)){
                 *end_floor_pointer = i;
             }
         }
@@ -71,6 +66,18 @@ int set_movement(int current_direction){
     return 0;
 }
 
+void set_above_or_below(int * above_or_below_pointer, int current_direction){
+    switch (current_direction) {
+        case 1:
+            *above_or_below_pointer = 1;
+            break;
+            
+        case -1:
+            *above_or_below_pointer = 0;
+            break;
+    }
+}
+
 int  add_orders(order_status *order_array_pointer){
     int new_order = 0;
     for (int i = 0; i<4; i++) {
@@ -94,7 +101,7 @@ int  add_orders(order_status *order_array_pointer){
 }
 
 
-int stop_or_continue(int current_floor,int end_floor, order_status *order_array_pointer){//Returns 1 if the elevator should stop
+int stop_at_floor(int current_floor,int end_floor, order_status *order_array_pointer){//Returns 1 if the elevator should stop
     if((order_array_pointer[current_floor].UP==1) && (end_floor>=current_floor)){
         return 1;
     }
@@ -113,6 +120,7 @@ void remove_orders(int current_floor, order_status *order_array_pointer){
     order_array_pointer[current_floor].UP = 0;
     order_array_pointer[current_floor].DOWN = 0;
     order_array_pointer[current_floor].INSIDE = 0;
+    set_order_lights(order_array);
 }
 
 void set_order_lights(order_status *order_array_pointer){

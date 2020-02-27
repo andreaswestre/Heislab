@@ -25,16 +25,21 @@ hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
 
     while(1){
 
-        if(add_orders(order_array)){
-            set_end_floor(end_floor_pointer,order_array,current_floor, current_direction);
-            if(current_direction==0){
-                if(stop_or_continue(current_floor,end_floor,order_array)){
+        if(add_orders(order_array)){                                                //Triggers when new order added.
+            set_end_floor(end_floor_pointer,order_array, current_direction);        //If in movement, only set end floor further along current path if needed
+            if(current_direction==0){                                               //If idle and order coming from current floor, open door
+                if(stop_at_floor(current_floor,end_floor,order_array)){             //then set movement variables
                 remove_orders(current_floor,order_array);
                 open_door();
+                set_end_floor(end_floor_pointer,order_array, current_direction);
+                set_current_direction(end_floor,current_floor,current_direction_pointer);
+                set_movement(current_direction);
+                set_above_or_below(above_or_below_pointer, current_direction);
             }
                 else{
                     set_current_direction(end_floor,current_floor,current_direction_pointer);
                     set_movement(current_direction);
+                    set_above_or_below(above_or_below_pointer, current_direction);
                 }
             }
         }
@@ -42,29 +47,70 @@ hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
         
         
 
-     if(check_current_floor(current_floor_pointer)){
-        if(stop_or_continue(current_floor,end_floor,order_array)){
-            remove_orders(current_floor,order_array);
-            set_end_floor(end_floor_pointer,order_array,current_floor, current_direction);
-            open_door();
+     if(new_floor_registered(current_floor_pointer)){                  //triggers when elevator reaches new floor.
+        if(stop_at_floor(current_floor,end_floor,order_array)){        //Checks if elevator should stop at the floor.
+            remove_orders(current_floor,order_array);                  //If stopped, remove orders on floor, open door, and set queue variables.
+            open_door();                                               //Then continue if unadressed orders, or stay put otherwise.
+            set_end_floor(end_floor_pointer,order_array, current_direction);
+            set_current_direction(end_floor,current_floor,current_direction_pointer);
+            set_movement(current_direction);
+            set_above_or_below(above_or_below_pointer, current_direction);
         }
          
      }
      
 
-    if(hardware_read_stop_signal()){
-        while(hardware_read_stop_signal()){
-
-            hardware_command_movement(HARDWARE_MOVEMENT_STOP);
+    if(hardware_read_stop_signal()){                       //enter emergency stop mode
+        hardware_command_movement(HARDWARE_MOVEMENT_STOP);
+        int leave_stop_mode = 0;                           //leaves stop mode loop when set to 1.
+        double stop_position = current_floor;              //set to current floor or current floor+-0.5 if above or below.
+        if(current_direction){                             //checks if elevator was moving before emergency stop
+            switch (above_or_below) {
+                case 1:
+                    stop_position+= 0.5;
+                    break;
+                case 0:
+                    stop_position-= 0.5;
+                    break;
+                }
+            }
+        else if(current_direction == 0){
+            hardware_command_door_open(1);
+        }
+        while(1){
             for (int i = 0; i<4; i++){
                 remove_orders(i,order_array);
             }
-            
-    }
-    while(1){
-        add_orders(order_array);
-        
-    }
-        }
-}
-}
+            while(!hardware_read_stop_signal()){
+                if(stop_position==current_floor){           // if stationory on floor can safely leave stop mode
+                    leave_stop_mode = 1;
+                    open_door();
+                    break;
+                }//endif(stop_position==current_floor)
+                if(add_orders(order_array)){                //if between floors, must set direction depending on first new order before leaving stop mode.
+                    set_end_floor(end_floor_pointer,order_array, current_direction);
+                    if(end_floor>stop_position){
+                        current_direction = 1;
+                        set_movement(current_direction);
+                        leave_stop_mode = 1;
+                        break;
+                    }//endif(end_floor>stop_position)
+                    else if(end_floor<stop_position){
+                        current_direction = -1;
+                        set_movement(current_direction);
+                        leave_stop_mode = 1;
+                        break;
+                    }//end else if(end_floor<stop_position)
+                   
+                }//endif(add_orders(order_array))
+                if(leave_stop_mode){
+                    break;
+                }//endif(leave_stop_mode) (inner loop)
+            }//endwhile(!hardware_read_stop_signal())
+            if(leave_stop_mode){
+                break;
+            }//endif(leave_stop_mode) (outer loop)
+        }//endwhile(1) (stop mode loop)
+    }//endif(hardware_read_stop_signal())
+}//endwhile(1) (main loop)
+}//endmain()

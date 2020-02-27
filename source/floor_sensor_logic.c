@@ -12,7 +12,7 @@ int current_floor = 0;
 
 int * current_floor_pointer = &current_floor;
 
-int check_current_floor(int * current_floor_pointer){
+int new_floor_registered(int * current_floor_pointer){
 if(hardware_read_floor_sensor(0) && (*current_floor_pointer!=0)){
     *current_floor_pointer = 0;
     hardware_command_floor_indicator_on(0);
