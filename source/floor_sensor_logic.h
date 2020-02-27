@@ -25,7 +25,7 @@ float * current_floor_pointer;//= &current_floor;
  *@checks the current floor and sets the current floor variable.
  *@param current_floor_pointer pointer to current floor.
  */
-int new_floor_registered(int * current_floor_pointer);
+int new_floor_registered(float * current_floor_pointer);
 
 #endif /* floor_sensor_logic_h */
 

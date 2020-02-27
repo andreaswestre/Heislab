@@ -15,6 +15,8 @@
 /**
  *@brief Starts a timer loop of 3 seconds.
  */
+int obstruction;
+int * obstruction_pointer;
 void setTimeout();
 
 /**

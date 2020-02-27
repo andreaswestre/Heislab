@@ -101,13 +101,13 @@ int  add_orders(order_status *order_array_pointer){
 
 
 int stop_at_floor(float current_floor,int end_floor, order_status *order_array_pointer){//Returns 1 if the elevator should stop
-    if((order_array_pointer[current_floor].UP==1) && (end_floor>=current_floor)){
+    if((order_array_pointer[(int)current_floor].UP==1) && (end_floor>=current_floor)){
         return 1;
     }
-    else if((order_array_pointer[current_floor].DOWN==1) && (end_floor<=current_floor)){
+    else if((order_array_pointer[(int)current_floor].DOWN==1) && (end_floor<=current_floor)){
         return 1;
     }
-    else if(order_array_pointer[current_floor].INSIDE==1){
+    else if(order_array_pointer[(int)current_floor].INSIDE==1){
         return 1;
     }
     else{
@@ -116,9 +116,9 @@ int stop_at_floor(float current_floor,int end_floor, order_status *order_array_p
 }
 
 void remove_orders(float current_floor, order_status *order_array_pointer){
-    order_array_pointer[current_floor].UP = 0;
-    order_array_pointer[current_floor].DOWN = 0;
-    order_array_pointer[current_floor].INSIDE = 0;
+    order_array_pointer[(int)current_floor].UP = 0;
+    order_array_pointer[(int)current_floor].DOWN = 0;
+    order_array_pointer[(int)current_floor].INSIDE = 0;
     set_order_lights(order_array);
 }
 
