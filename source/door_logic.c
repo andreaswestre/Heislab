@@ -23,11 +23,25 @@ void setTimeout(){
         } 
         if(hardware_read_obstruction_signal()){
                 *obstruction_pointer = 1;
+                while( hardware_read_stop_signal() ){
+            //break;
+            hardware_command_stop_light(1);
+            for (int i = 0; i<4; i++){
+                remove_orders(i,order_array);
+            }
+        }
+        hardware_command_stop_light(0);
                 break;
             }
-        if( hardware_read_stop_signal() ){
-            break;
+        while( hardware_read_stop_signal() ){
+            //break;
+            hardware_command_stop_light(1);
+            for (int i = 0; i<4; i++){
+                remove_orders(i,order_array);
+            }
         }
+        hardware_command_stop_light(0);
+
     }
     printf("Obstruction: %d \n" ,*obstruction_pointer);
     
@@ -38,7 +52,7 @@ void open_door(){
     hardware_command_movement(HARDWARE_MOVEMENT_STOP);
     hardware_command_door_open(1);
     setTimeout();
-    while(*obstruction_pointer){
+    while(*obstruction_pointer ){
         *obstruction_pointer = 0;
         setTimeout();
     }

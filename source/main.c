@@ -68,6 +68,7 @@ hardware_command_movement(HARDWARE_MOVEMENT_DOWN);    //When program starts, ele
 
     if(hardware_read_stop_signal()){                       //enter emergency stop mode
         hardware_command_movement(HARDWARE_MOVEMENT_STOP);
+        hardware_command_stop_light(1);
         int leave_stop_mode = 0;                           //leaves stop mode loop when set to 1.
                      //set to current floor or current floor+-0.5 if above or below.
         
@@ -93,6 +94,7 @@ hardware_command_movement(HARDWARE_MOVEMENT_DOWN);    //When program starts, ele
                 remove_orders(i,order_array);
             }
             while(!hardware_read_stop_signal()){
+        hardware_command_stop_light(0);
                 if(current_direction == 0){           // if stationory on floor can safely leave stop mode
                     leave_stop_mode = 1;
                     open_door();
