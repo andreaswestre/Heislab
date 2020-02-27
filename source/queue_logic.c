@@ -7,7 +7,6 @@
 
 #include "queue_logic.h"
 #include <stdio.h>
-#include "hardware.h"
 order_status order_array[4];
 
 int end_floor = 0;
