@@ -14,7 +14,7 @@ int main(){
     printf("=== Example Program ===\n");
     printf("Press the stop button on the elevator panel to exit\n");
 
-hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
+hardware_command_movement(HARDWARE_MOVEMENT_DOWN);    //When program starts, elevator moves down to 1. floor.
     while(1){
         if (hardware_read_floor_sensor(0)){
             break;
@@ -49,10 +49,10 @@ hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
 
      if(new_floor_registered(current_floor_pointer)){                  //triggers when elevator reaches new floor.
         if(stop_at_floor(current_floor,end_floor,order_array)){        //Checks if elevator should stop at the floor.
-            remove_orders(current_floor,order_array);                  //If stopped, remove orders on floor, open door, and set queue variables.
-            open_door();                                               //Then continue if unadressed orders, or stay put otherwise.
+            remove_orders(current_floor,order_array);
             set_end_floor(end_floor_pointer,order_array, current_direction);
-            set_current_direction(end_floor,current_floor,current_direction_pointer);
+            set_current_direction(end_floor,current_floor,current_direction_pointer);//If stopped, remove orders on floor, open door, and set queue variables.
+            open_door();                                               //Then continue if unadressed orders, or stay put otherwise.
             set_movement(current_direction);
             set_above_or_below(above_or_below_pointer, current_direction);
         }

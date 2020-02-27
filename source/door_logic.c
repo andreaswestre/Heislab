@@ -27,7 +27,11 @@ void setTimeout()
     // wait while until needed time comes
     do {
         milliseconds_since = clock() * 1000 / CLOCKS_PER_SEC;
-                add_orders(order_array);
+        if(add_orders(order_array)){
+            set_end_floor(end_floor_pointer,order_array, current_direction);
+            set_current_direction(end_floor,current_floor,current_direction_pointer);
+        }
+                
         
     } while (milliseconds_since <= end);
     while(hardware_read_obstruction_signal()){
