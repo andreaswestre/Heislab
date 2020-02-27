@@ -28,6 +28,8 @@ void setTimeout()
     do {
         milliseconds_since = clock() * 1000 / CLOCKS_PER_SEC;
         if(add_orders(order_array)){
+            remove_orders(current_floor,order_array);
+            set_order_lights(order_array);
             set_end_floor(end_floor_pointer,order_array, current_direction);
             set_current_direction(end_floor,current_floor,current_direction_pointer);
         }
@@ -37,6 +39,7 @@ void setTimeout()
     while(hardware_read_obstruction_signal()){
         setTimeout();
     }
+
 }
 
 void open_door(){

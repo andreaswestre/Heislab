@@ -39,6 +39,7 @@ hardware_command_movement(HARDWARE_MOVEMENT_DOWN);    //When program starts, ele
             }
                 else{
                     set_current_direction(end_floor,current_floor,current_direction_pointer);
+                    printf("%d", current_direction);
                     set_movement(current_direction);
                     set_above_or_below(above_or_below_pointer, current_direction);
                 }
@@ -46,13 +47,17 @@ hardware_command_movement(HARDWARE_MOVEMENT_DOWN);    //When program starts, ele
         }
         
         
+
         
 
      if(new_floor_registered(current_floor_pointer)){                  //triggers when elevator reaches new floor.
         if(stop_at_floor(current_floor,end_floor,order_array)){        //Checks if elevator should stop at the floor.
             remove_orders(current_floor,order_array);
+            set_current_direction(end_floor,current_floor,current_direction_pointer);
             set_end_floor(end_floor_pointer,order_array, current_direction);
             set_current_direction(end_floor,current_floor,current_direction_pointer);//If stopped, remove orders on floor, open door, and set queue variables.
+            printf("\n%d", end_floor);
+            printf("\n%d", current_direction);
             open_door();                                               //Then continue if unadressed orders, or stay put otherwise.
             set_movement(current_direction);
             set_above_or_below(above_or_below_pointer, current_direction);
@@ -64,8 +69,9 @@ hardware_command_movement(HARDWARE_MOVEMENT_DOWN);    //When program starts, ele
     if(hardware_read_stop_signal()){                       //enter emergency stop mode
         hardware_command_movement(HARDWARE_MOVEMENT_STOP);
         int leave_stop_mode = 0;                           //leaves stop mode loop when set to 1.
-        double stop_position = current_floor;              //set to current floor or current floor+-0.5 if above or below.
-        if(current_direction){                             //checks if elevator was moving before emergency stop
+        double stop_position = current_floor;
+        end_floor = current_floor;             //set to current floor or current floor+-0.5 if above or below.
+        if(current_direction == 1 || current_direction == -1){                             //checks if elevator was moving before emergency stop
             switch (above_or_below) {
                 case 1:
                     stop_position+= 0.5;
@@ -74,6 +80,7 @@ hardware_command_movement(HARDWARE_MOVEMENT_DOWN);    //When program starts, ele
                     stop_position-= 0.5;
                     break;
                 }
+                printf("%f", stop_position);
             }
         else if(current_direction == 0){
             hardware_command_door_open(1);
@@ -92,12 +99,16 @@ hardware_command_movement(HARDWARE_MOVEMENT_DOWN);    //When program starts, ele
                     set_end_floor(end_floor_pointer,order_array, current_direction);
                     if(end_floor>stop_position){
                         current_direction = 1;
+                        current_floor-=1;
+                        above_or_below = 1;
                         set_movement(current_direction);
                         leave_stop_mode = 1;
                         break;
                     }//endif(end_floor>stop_position)
                     else if(end_floor<stop_position){
                         current_direction = -1;
+                        current_floor += 1;
+                        above_or_below = 0;
                         set_movement(current_direction);
                         leave_stop_mode = 1;
                         break;

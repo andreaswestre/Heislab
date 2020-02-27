@@ -80,16 +80,16 @@ void set_above_or_below(int * above_or_below_pointer, int current_direction){
 int  add_orders(order_status *order_array_pointer){
     int new_order = 0;
     for (int i = 0; i<4; i++) {
-        if(hardware_read_order(i,HARDWARE_ORDER_UP)){
+        if((hardware_read_order(i,HARDWARE_ORDER_UP)) && order_array_pointer[i].UP == 0){
             order_array_pointer[i].UP = 1;
             new_order = 1;
         }
-        if(hardware_read_order(i,HARDWARE_ORDER_DOWN)){
+        if(hardware_read_order(i,HARDWARE_ORDER_DOWN) && order_array_pointer[i].DOWN == 0){
             order_array_pointer[i].DOWN = 1;
             new_order = 1;
 
         }
-        if(hardware_read_order(i,HARDWARE_ORDER_INSIDE)){
+        if(hardware_read_order(i,HARDWARE_ORDER_INSIDE) && order_array_pointer[i].INSIDE == 0){
             order_array_pointer[i].INSIDE = 1;
             new_order = 1;
 
