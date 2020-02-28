@@ -5,10 +5,10 @@
 //  Created by Aksel Vaaler on 28/02/2020.
 //
 
-#include "Emergency_stop_logic.h"
+#include "emergency_stop_logic.h"
 
 
-void stop_movement_and_set_stop_floor(float * pointer current_floor_pointer, int * end_floor_pointer, int current_direction, int above_or_below){
+void stop_movement_and_set_stop_floor(float *  current_floor_pointer, int * end_floor_pointer, int current_direction, int above_or_below){
     hardware_command_movement(HARDWARE_MOVEMENT_STOP);
     if(current_direction && ( ((int)(current_floor*10)%2) == 0)){
     end_floor = current_floor;
@@ -37,7 +37,6 @@ void set_stop_light_and_remove_all_orders(order_status * order_array){
 
 int currently_at_floor(int current_direction){
     if(current_direction == 0){
-        open_door();
         return 1;
     }
     return 0;
@@ -62,19 +61,25 @@ void exit_emergency_stop_mode(order_status *order_array, float current_floor, in
 void emergency_stop_mode(order_status *order_array, float * current_floor_pointer, int * end_floor_pointer, int * current_direction_pointer, int above_or_below){
     
     stop_movement_and_set_stop_floor(current_floor_pointer, end_floor_pointer, *current_direction_pointer, above_or_below);
-    
-    switch (hardware_read_stop_signal()) {
-        case 1:
+    int leave_stop_mode = 0;
+    while(!leave_stop_mode){
+            
             set_stop_light_and_remove_all_orders(order_array);
             
-        case 0:
+            while(!hardware_read_stop_signal()){
+            hardware_command_stop_light(0);
+
             if(currently_at_floor(*current_direction_pointer)){
+                open_door();
+                leave_stop_mode = 1;
                 break;
             }
-            else{
-                while(!add_orders(order_array));
+            if(add_orders(order_array)){
+                leave_stop_mode = 1;
                 break;
-            }
+            }     
+        }
+    
     }
     exit_emergency_stop_mode(order_array, *current_floor_pointer, end_floor_pointer, current_direction_pointer);
 }
