@@ -12,8 +12,7 @@ int main(){
         exit(1);
     }
  
-    printf("=== Example Program ===\n");
-    printf("Press the stop button on the elevator panel to exit\n");
+    printf("=== Årets heis ===\n");
 
 hardware_command_movement(HARDWARE_MOVEMENT_DOWN);    //When program starts, elevator moves down to 1. floor.
     while(1){
@@ -39,7 +38,6 @@ hardware_command_movement(HARDWARE_MOVEMENT_DOWN);    //When program starts, ele
             }
                 else{
                     set_current_direction(end_floor,current_floor,current_direction_pointer);
-                    printf("%d", current_direction);
                     set_movement(current_direction);
                     set_above_or_below(above_or_below_pointer, current_direction);
                 }
@@ -56,8 +54,6 @@ hardware_command_movement(HARDWARE_MOVEMENT_DOWN);    //When program starts, ele
             set_current_direction(end_floor,current_floor,current_direction_pointer);
             set_end_floor(end_floor_pointer,order_array, current_direction);
             set_current_direction(end_floor,current_floor,current_direction_pointer);//If stopped, remove orders on floor, open door, and set queue variables.
-            //printf("\n%d", end_floor);
-            //printf("\n%d", current_direction);
             open_door();                                               //Then continue if unadressed orders, or stay put otherwise.
             set_movement(current_direction);
             set_above_or_below(above_or_below_pointer, current_direction);
@@ -68,7 +64,6 @@ hardware_command_movement(HARDWARE_MOVEMENT_DOWN);    //When program starts, ele
 
     if(hardware_read_stop_signal()){                       //enter emergency stop mode
         hardware_command_movement(HARDWARE_MOVEMENT_STOP);
-        hardware_command_stop_light(1);
         int leave_stop_mode = 0;                           //leaves stop mode loop when set to 1.
                      //set to current floor or current floor+-0.5 if above or below.
         
@@ -84,12 +79,12 @@ hardware_command_movement(HARDWARE_MOVEMENT_DOWN);    //When program starts, ele
                     current_floor-= 0.5;
                     break;
                 }
-                //printf("\n%f Current floor: ", current_floor);
             }
         else if(current_direction == 0){
             hardware_command_door_open(1);
         }
         while(1){
+            hardware_command_stop_light(1);
             for (int i = 0; i<4; i++){
                 remove_orders(i,order_array);
             }

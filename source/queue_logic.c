@@ -47,7 +47,6 @@ void set_current_direction(int end_floor, float current_floor, int * current_dir
 
 int set_movement(int current_direction){
     if(current_direction==1){    
-        printf("set movement kjører");
 
 
         hardware_command_movement(HARDWARE_MOVEMENT_UP);
@@ -61,7 +60,6 @@ int set_movement(int current_direction){
         hardware_command_movement(HARDWARE_MOVEMENT_STOP);
         return 0;
     }
-    printf("dette er feiul");
     return 0;
 }
 

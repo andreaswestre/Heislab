@@ -43,7 +43,6 @@ void setTimeout(){
         hardware_command_stop_light(0);
 
     }
-    printf("Obstruction: %d \n" ,*obstruction_pointer);
     
 }
 
