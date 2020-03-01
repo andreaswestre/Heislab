@@ -45,10 +45,9 @@ int main()
             }
         }
 
-        if ((new_floor_registered(current_floor_pointer)))
+        if (new_floor_registered(current_floor_pointer) && stop_at_floor(current_floor, end_floor, order_array) )
         { //triggers when elevator reaches new floor.
-            if (stop_at_floor(current_floor, end_floor, order_array))
-            { //Checks if elevator should stop at the floor.
+            //Checks if elevator should stop at the floor.
                 remove_orders(current_floor, order_array);
                 set_current_direction(end_floor, current_floor, current_direction_pointer);
                 set_end_floor(end_floor_pointer, order_array, current_direction);
@@ -56,7 +55,6 @@ int main()
                 open_door();                                                                //Then continue if unadressed orders, or stay put otherwise.
                 set_movement(current_direction);
                 set_above_or_below(above_or_below_pointer, current_direction);
-            }
         }
 
         if (hardware_read_stop_signal())
