@@ -14,14 +14,15 @@
 #include "floor_sensor_logic.h"
 #include "emergency_stop_logic.h"
 /**
- *@brief Starts a timer loop of 3 seconds.
+ *@brief Starts a timer loop of 3 seconds and checks if there are any new orders while the door is open.
  */
 int obstruction;
 int * obstruction_pointer;
+
 void setTimeout();
 
 /**
- *@brief Sets open door signal.
+ *@brief Sets open door signal, and closes it after the door is closed.
  */
 void open_door();
 

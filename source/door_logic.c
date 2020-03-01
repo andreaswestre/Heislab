@@ -35,14 +35,6 @@ void setTimeout()
         if (hardware_read_obstruction_signal())
         {
             *obstruction_pointer = 1;
-
-            if (hardware_read_stop_signal())
-            {
-                *stop_pointer = 1;
-                *current_direction_pointer = 0;
-                *end_floor_pointer = current_floor;
-                break;
-            }
         }
         if (hardware_read_stop_signal())
         {
