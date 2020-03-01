@@ -12,6 +12,7 @@
 #include "hardware.h"
 #include "queue_logic.h"
 #include "floor_sensor_logic.h"
+#include "emergency_stop_logic.h"
 /**
  *@brief Starts a timer loop of 3 seconds.
  */
