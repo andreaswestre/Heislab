@@ -3,7 +3,7 @@
 #include "hardware.h"
 #include "door_logic.h"
 #include "floor_sensor_logic.h"
-#include "queue_logic.h"
+#include "order_and_movement_logic.h"
 #include "emergency_stop_logic.h"
 
 int main()
@@ -31,7 +31,7 @@ int main()
                 { //then set movement variables
                     remove_orders(current_floor, order_array);
                     open_door();
-                    set_end_floor(end_floor_pointer, order_array, current_direction);
+                    
                 }
                     set_current_direction(end_floor, current_floor, current_direction_pointer);
                     set_movement(current_direction);

@@ -40,18 +40,20 @@ void setTimeout()
             {
                 *stop_pointer = 1;
                 *current_direction_pointer = 0;
+                *end_floor_pointer = current_floor;
                 break;
             }
         }
         if (hardware_read_stop_signal())
         {
             *current_direction_pointer = 0;
+            *end_floor_pointer = current_floor;
             *stop_pointer = 1;
             break;
         }
     }
 
-    hardware_command_stop_light(0);
+    
 }
 
 void open_door()

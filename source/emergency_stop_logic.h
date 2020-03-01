@@ -11,7 +11,7 @@
 #include "hardware.h"
 #include "door_logic.h"
 #include "floor_sensor_logic.h"
-#include "queue_logic.h"
+#include "order_and_movement_logic.h"
 /**
  *@brief stops elevator movement and sets stop floor to current floor if needed.
  *@param current_floor_pointer points to current floor.
