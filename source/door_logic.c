@@ -9,11 +9,19 @@
 
 int obstruction = 0;
 int *obstruction_pointer = &obstruction;
+int stop_called = 0;
+int *stop_pointer = &stop_called;
+
+//int milliseconds_since = clock() * 1000 / CLOCKS_PER_SEC; // needed count milliseconds of return from this timeout
+//int end = milliseconds_since + milliseconds;
+
 void setTimeout()
 {
     int milliseconds = 3000;                                  // a current time of milliseconds
     int milliseconds_since = clock() * 1000 / CLOCKS_PER_SEC; // needed count milliseconds of return from this timeout
-    int end = milliseconds_since + milliseconds;              // wait while until needed time comes
+    int end = milliseconds_since + milliseconds;
+
+    // wait while until needed time comes
     while (milliseconds_since <= end)
     {
         milliseconds_since = clock() * 1000 / CLOCKS_PER_SEC;
@@ -22,26 +30,22 @@ void setTimeout()
             remove_orders(current_floor, order_array);
             set_order_lights(order_array);
             set_end_floor(end_floor_pointer, order_array, current_direction);
-            set_current_direction(end_floor, current_floor, current_direction_pointer);
         }
         if (hardware_read_obstruction_signal())
         {
             *obstruction_pointer = 1;
 
-            while (hardware_read_stop_signal())
+            if (hardware_read_stop_signal())
             {
-                hardware_command_stop_light(1);
-                emergency_stop_mode(order_array, current_floor_pointer, end_floor_pointer, current_direction_pointer, above_or_below);
-                open_door();
+                *stop_pointer = 1;
+                break;
             }
         }
-        while (hardware_read_stop_signal())
+        if (hardware_read_stop_signal())
         {
-            hardware_command_stop_light(1);
-            emergency_stop_mode(order_array, current_floor_pointer, end_floor_pointer, current_direction_pointer, above_or_below);
-            open_door();
+            *stop_pointer = 1;
+            break;
         }
-        //break;
     }
 
     hardware_command_stop_light(0);
@@ -56,8 +60,19 @@ void open_door()
         setTimeout();
         while (*obstruction_pointer)
         {
+            if (*stop_pointer)
+            {
+                *stop_pointer = 0;
+                break;
+            }
             *obstruction_pointer = 0;
             setTimeout();
+        }
+        if (!*stop_pointer)
+        {
+            printf("cutgiarega");
+            set_current_direction(end_floor, current_floor, current_direction_pointer);
+            *stop_pointer = 0;
         }
         hardware_command_door_open(0);
     }
