@@ -45,8 +45,7 @@ int above_or_below;
  */
 int * above_or_below_pointer;
 
-
-
+void starting_procedure(float * current_floor_pointer, int * end_floor_pointer);
 /**
  *@brief adds orders to the order array.
  *@param order_array_pointer pointer to @c order_status.

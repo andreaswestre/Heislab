@@ -17,7 +17,7 @@ int *stop_pointer = &stop_called;
 
 void setTimeout()
 {
-    int milliseconds = 3000;                                  // a current time of milliseconds
+    int milliseconds = 2500;                                  // a current time of milliseconds
     int milliseconds_since = clock() * 1000 / CLOCKS_PER_SEC; // needed count milliseconds of return from this timeout
     int end = milliseconds_since + milliseconds;
 
