@@ -1,0 +1,156 @@
+\hypertarget{emergency__stop__logic_8h}{}\section{source/emergency\+\_\+stop\+\_\+logic.h File Reference}
+\label{emergency__stop__logic_8h}\index{source/emergency\+\_\+stop\+\_\+logic.\+h@{source/emergency\+\_\+stop\+\_\+logic.\+h}}
+
+
+procedure for emergency stop.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}hardware.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}door\+\_\+logic.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}floor\+\_\+sensor\+\_\+logic.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}queue\+\_\+logic.\+h\char`\"{}}\newline
+Include dependency graph for emergency\+\_\+stop\+\_\+logic.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{emergency__stop__logic_8h_ac50823bd7a10d79eb87e38d5d1321e58}{stop\+\_\+movement\+\_\+and\+\_\+set\+\_\+stop\+\_\+floor} (float $\ast$\hyperlink{floor__sensor__logic_8h_a0062fd80d9b82e8d1dc094e48dd67fb3}{current\+\_\+floor\+\_\+pointer}, int $\ast$\hyperlink{queue__logic_8h_a1d074b8f2bb239405f636826b2c087c3}{end\+\_\+floor\+\_\+pointer}, int \hyperlink{queue__logic_8h_a4d7deb15e280e9370b8f1b0f14635ac9}{current\+\_\+direction}, int \hyperlink{queue__logic_8h_ab0d4cccd67bb6f6991832bdb360c63e7}{above\+\_\+or\+\_\+below})
+\begin{DoxyCompactList}\small\item\em stops elevator movement and sets stop floor to current floor if needed. \end{DoxyCompactList}\item 
+void \hyperlink{emergency__stop__logic_8h_a651f1ee3bbd9f5be386676ea78754f34}{set\+\_\+stop\+\_\+light\+\_\+and\+\_\+remove\+\_\+all\+\_\+orders} (\hyperlink{structorder__status}{order\+\_\+status} $\ast$\hyperlink{queue__logic_8h_a6e2e72ed5c1d54eb584cf875db3b01eb}{order\+\_\+array})
+\begin{DoxyCompactList}\small\item\em activates stop light and removes all orders. \end{DoxyCompactList}\item 
+int \hyperlink{emergency__stop__logic_8h_a6bd26ab7772c708e0e4efbe645f78ee5}{currently\+\_\+at\+\_\+floor} (int \hyperlink{queue__logic_8h_a4d7deb15e280e9370b8f1b0f14635ac9}{current\+\_\+direction})
+\begin{DoxyCompactList}\small\item\em checks if currently standing still at floor. \end{DoxyCompactList}\item 
+void \hyperlink{emergency__stop__logic_8h_a8282bf3b476748b2a0215620484cbb8c}{exit\+\_\+emergency\+\_\+stop\+\_\+mode} (\hyperlink{structorder__status}{order\+\_\+status} $\ast$\hyperlink{queue__logic_8h_a6e2e72ed5c1d54eb584cf875db3b01eb}{order\+\_\+array}, float \hyperlink{floor__sensor__logic_8h_a999dc85985ad4dc5c2c10a52c02b2bb4}{current\+\_\+floor}, int $\ast$\hyperlink{queue__logic_8h_a1d074b8f2bb239405f636826b2c087c3}{end\+\_\+floor\+\_\+pointer}, int $\ast$\hyperlink{queue__logic_8h_aa2dcdca19cc14ed1fce8832113f342f1}{current\+\_\+direction\+\_\+pointer})
+\begin{DoxyCompactList}\small\item\em special procedure for when leaving emergency stop mode while between floors. sets correct direction and movement. \end{DoxyCompactList}\item 
+void \hyperlink{emergency__stop__logic_8h_a44ab3d37f9a38e73d0c41c4167b6eca3}{emergency\+\_\+stop\+\_\+mode} (\hyperlink{structorder__status}{order\+\_\+status} $\ast$\hyperlink{queue__logic_8h_a6e2e72ed5c1d54eb584cf875db3b01eb}{order\+\_\+array}, float $\ast$\hyperlink{floor__sensor__logic_8h_a0062fd80d9b82e8d1dc094e48dd67fb3}{current\+\_\+floor\+\_\+pointer}, int $\ast$\hyperlink{queue__logic_8h_a1d074b8f2bb239405f636826b2c087c3}{end\+\_\+floor\+\_\+pointer}, int $\ast$\hyperlink{queue__logic_8h_aa2dcdca19cc14ed1fce8832113f342f1}{current\+\_\+direction\+\_\+pointer}, int \hyperlink{queue__logic_8h_ab0d4cccd67bb6f6991832bdb360c63e7}{above\+\_\+or\+\_\+below})
+\begin{DoxyCompactList}\small\item\em Called when emergency stop button is pressed. stops movement, sets stop light and removes all orders. if elevator standing still at floor, leaves emergency stop mode when stop button is released. if between floors, waits for first new order, then sets correct direction and movement before leaving stop mode. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+procedure for emergency stop. 
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{emergency__stop__logic_8h_a6bd26ab7772c708e0e4efbe645f78ee5}\label{emergency__stop__logic_8h_a6bd26ab7772c708e0e4efbe645f78ee5}} 
+\index{emergency\+\_\+stop\+\_\+logic.\+h@{emergency\+\_\+stop\+\_\+logic.\+h}!currently\+\_\+at\+\_\+floor@{currently\+\_\+at\+\_\+floor}}
+\index{currently\+\_\+at\+\_\+floor@{currently\+\_\+at\+\_\+floor}!emergency\+\_\+stop\+\_\+logic.\+h@{emergency\+\_\+stop\+\_\+logic.\+h}}
+\subsubsection{\texorpdfstring{currently\+\_\+at\+\_\+floor()}{currently\_at\_floor()}}
+{\footnotesize\ttfamily int currently\+\_\+at\+\_\+floor (\begin{DoxyParamCaption}\item[{int}]{current\+\_\+direction }\end{DoxyParamCaption})}
+
+
+
+checks if currently standing still at floor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em current\+\_\+direction} & the current direction of movement. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+returns 1 if at standstill at floor, 0 otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line 43 of file emergency\+\_\+stop\+\_\+logic.\+c.
+
+\mbox{\Hypertarget{emergency__stop__logic_8h_a44ab3d37f9a38e73d0c41c4167b6eca3}\label{emergency__stop__logic_8h_a44ab3d37f9a38e73d0c41c4167b6eca3}} 
+\index{emergency\+\_\+stop\+\_\+logic.\+h@{emergency\+\_\+stop\+\_\+logic.\+h}!emergency\+\_\+stop\+\_\+mode@{emergency\+\_\+stop\+\_\+mode}}
+\index{emergency\+\_\+stop\+\_\+mode@{emergency\+\_\+stop\+\_\+mode}!emergency\+\_\+stop\+\_\+logic.\+h@{emergency\+\_\+stop\+\_\+logic.\+h}}
+\subsubsection{\texorpdfstring{emergency\+\_\+stop\+\_\+mode()}{emergency\_stop\_mode()}}
+{\footnotesize\ttfamily void emergency\+\_\+stop\+\_\+mode (\begin{DoxyParamCaption}\item[{\hyperlink{structorder__status}{order\+\_\+status} $\ast$}]{order\+\_\+array,  }\item[{float $\ast$}]{current\+\_\+floor\+\_\+pointer,  }\item[{int $\ast$}]{end\+\_\+floor\+\_\+pointer,  }\item[{int $\ast$}]{current\+\_\+direction\+\_\+pointer,  }\item[{int}]{above\+\_\+or\+\_\+below }\end{DoxyParamCaption})}
+
+
+
+Called when emergency stop button is pressed. stops movement, sets stop light and removes all orders. if elevator standing still at floor, leaves emergency stop mode when stop button is released. if between floors, waits for first new order, then sets correct direction and movement before leaving stop mode. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em order\+\_\+array} & the order array. \\
+\hline
+{\em current\+\_\+floor\+\_\+pointer} & points to current floor. \\
+\hline
+{\em end\+\_\+floor\+\_\+pointer} & points to end floor. \\
+\hline
+{\em current\+\_\+direction\+\_\+pointer} & points to current direction. \\
+\hline
+{\em above\+\_\+or\+\_\+below} & the position relative to current floor. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 70 of file emergency\+\_\+stop\+\_\+logic.\+c.
+
+\mbox{\Hypertarget{emergency__stop__logic_8h_a8282bf3b476748b2a0215620484cbb8c}\label{emergency__stop__logic_8h_a8282bf3b476748b2a0215620484cbb8c}} 
+\index{emergency\+\_\+stop\+\_\+logic.\+h@{emergency\+\_\+stop\+\_\+logic.\+h}!exit\+\_\+emergency\+\_\+stop\+\_\+mode@{exit\+\_\+emergency\+\_\+stop\+\_\+mode}}
+\index{exit\+\_\+emergency\+\_\+stop\+\_\+mode@{exit\+\_\+emergency\+\_\+stop\+\_\+mode}!emergency\+\_\+stop\+\_\+logic.\+h@{emergency\+\_\+stop\+\_\+logic.\+h}}
+\subsubsection{\texorpdfstring{exit\+\_\+emergency\+\_\+stop\+\_\+mode()}{exit\_emergency\_stop\_mode()}}
+{\footnotesize\ttfamily void exit\+\_\+emergency\+\_\+stop\+\_\+mode (\begin{DoxyParamCaption}\item[{\hyperlink{structorder__status}{order\+\_\+status} $\ast$}]{order\+\_\+array,  }\item[{float}]{current\+\_\+floor,  }\item[{int $\ast$}]{end\+\_\+floor\+\_\+pointer,  }\item[{int $\ast$}]{current\+\_\+direction\+\_\+pointer }\end{DoxyParamCaption})}
+
+
+
+special procedure for when leaving emergency stop mode while between floors. sets correct direction and movement. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em order\+\_\+array} & the order array. \\
+\hline
+{\em current\+\_\+floor} & the current floor. \\
+\hline
+{\em end\+\_\+floor\+\_\+pointer} & points to end floor. \\
+\hline
+{\em current\+\_\+direction\+\_\+pointer} & points to current direction. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 52 of file emergency\+\_\+stop\+\_\+logic.\+c.
+
+\mbox{\Hypertarget{emergency__stop__logic_8h_a651f1ee3bbd9f5be386676ea78754f34}\label{emergency__stop__logic_8h_a651f1ee3bbd9f5be386676ea78754f34}} 
+\index{emergency\+\_\+stop\+\_\+logic.\+h@{emergency\+\_\+stop\+\_\+logic.\+h}!set\+\_\+stop\+\_\+light\+\_\+and\+\_\+remove\+\_\+all\+\_\+orders@{set\+\_\+stop\+\_\+light\+\_\+and\+\_\+remove\+\_\+all\+\_\+orders}}
+\index{set\+\_\+stop\+\_\+light\+\_\+and\+\_\+remove\+\_\+all\+\_\+orders@{set\+\_\+stop\+\_\+light\+\_\+and\+\_\+remove\+\_\+all\+\_\+orders}!emergency\+\_\+stop\+\_\+logic.\+h@{emergency\+\_\+stop\+\_\+logic.\+h}}
+\subsubsection{\texorpdfstring{set\+\_\+stop\+\_\+light\+\_\+and\+\_\+remove\+\_\+all\+\_\+orders()}{set\_stop\_light\_and\_remove\_all\_orders()}}
+{\footnotesize\ttfamily void set\+\_\+stop\+\_\+light\+\_\+and\+\_\+remove\+\_\+all\+\_\+orders (\begin{DoxyParamCaption}\item[{\hyperlink{structorder__status}{order\+\_\+status} $\ast$}]{order\+\_\+array }\end{DoxyParamCaption})}
+
+
+
+activates stop light and removes all orders. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em order\+\_\+array} & the order array. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 34 of file emergency\+\_\+stop\+\_\+logic.\+c.
+
+\mbox{\Hypertarget{emergency__stop__logic_8h_ac50823bd7a10d79eb87e38d5d1321e58}\label{emergency__stop__logic_8h_ac50823bd7a10d79eb87e38d5d1321e58}} 
+\index{emergency\+\_\+stop\+\_\+logic.\+h@{emergency\+\_\+stop\+\_\+logic.\+h}!stop\+\_\+movement\+\_\+and\+\_\+set\+\_\+stop\+\_\+floor@{stop\+\_\+movement\+\_\+and\+\_\+set\+\_\+stop\+\_\+floor}}
+\index{stop\+\_\+movement\+\_\+and\+\_\+set\+\_\+stop\+\_\+floor@{stop\+\_\+movement\+\_\+and\+\_\+set\+\_\+stop\+\_\+floor}!emergency\+\_\+stop\+\_\+logic.\+h@{emergency\+\_\+stop\+\_\+logic.\+h}}
+\subsubsection{\texorpdfstring{stop\+\_\+movement\+\_\+and\+\_\+set\+\_\+stop\+\_\+floor()}{stop\_movement\_and\_set\_stop\_floor()}}
+{\footnotesize\ttfamily void stop\+\_\+movement\+\_\+and\+\_\+set\+\_\+stop\+\_\+floor (\begin{DoxyParamCaption}\item[{float $\ast$}]{current\+\_\+floor\+\_\+pointer,  }\item[{int $\ast$}]{end\+\_\+floor\+\_\+pointer,  }\item[{int}]{current\+\_\+direction,  }\item[{int}]{above\+\_\+or\+\_\+below }\end{DoxyParamCaption})}
+
+
+
+stops elevator movement and sets stop floor to current floor if needed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em current\+\_\+floor\+\_\+pointer} & points to current floor. \\
+\hline
+{\em end\+\_\+floor\+\_\+pointer} & points to end floor. \\
+\hline
+{\em current\+\_\+direction} & the current direction of movement. \\
+\hline
+{\em above\+\_\+or\+\_\+below} & the position relative to current floor. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 10 of file emergency\+\_\+stop\+\_\+logic.\+c.
+

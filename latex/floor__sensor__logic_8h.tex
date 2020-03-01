@@ -1,0 +1,63 @@
+\hypertarget{floor__sensor__logic_8h}{}\section{source/floor\+\_\+sensor\+\_\+logic.h File Reference}
+\label{floor__sensor__logic_8h}\index{source/floor\+\_\+sensor\+\_\+logic.\+h@{source/floor\+\_\+sensor\+\_\+logic.\+h}}
+
+
+Reads floor sensors and sets current floor variable.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}hardware.\+h\char`\"{}}\newline
+Include dependency graph for floor\+\_\+sensor\+\_\+logic.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{floor__sensor__logic_8h_a86b537754c8b21a2ec4366633b2cc388}{new\+\_\+floor\+\_\+registered} (float $\ast$\hyperlink{floor__sensor__logic_8h_a0062fd80d9b82e8d1dc094e48dd67fb3}{current\+\_\+floor\+\_\+pointer})
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{floor__sensor__logic_8h_a999dc85985ad4dc5c2c10a52c02b2bb4}\label{floor__sensor__logic_8h_a999dc85985ad4dc5c2c10a52c02b2bb4}} 
+float \hyperlink{floor__sensor__logic_8h_a999dc85985ad4dc5c2c10a52c02b2bb4}{current\+\_\+floor}
+\begin{DoxyCompactList}\small\item\em The current floor. \end{DoxyCompactList}\item 
+float $\ast$ \hyperlink{floor__sensor__logic_8h_a0062fd80d9b82e8d1dc094e48dd67fb3}{current\+\_\+floor\+\_\+pointer}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Reads floor sensors and sets current floor variable. 
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{floor__sensor__logic_8h_a86b537754c8b21a2ec4366633b2cc388}\label{floor__sensor__logic_8h_a86b537754c8b21a2ec4366633b2cc388}} 
+\index{floor\+\_\+sensor\+\_\+logic.\+h@{floor\+\_\+sensor\+\_\+logic.\+h}!new\+\_\+floor\+\_\+registered@{new\+\_\+floor\+\_\+registered}}
+\index{new\+\_\+floor\+\_\+registered@{new\+\_\+floor\+\_\+registered}!floor\+\_\+sensor\+\_\+logic.\+h@{floor\+\_\+sensor\+\_\+logic.\+h}}
+\subsubsection{\texorpdfstring{new\+\_\+floor\+\_\+registered()}{new\_floor\_registered()}}
+{\footnotesize\ttfamily int new\+\_\+floor\+\_\+registered (\begin{DoxyParamCaption}\item[{float $\ast$}]{current\+\_\+floor\+\_\+pointer }\end{DoxyParamCaption})}
+
+the current floor and sets the current floor variable. 
+\begin{DoxyParams}{Parameters}
+{\em current\+\_\+floor\+\_\+pointer} & pointer to current floor. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 15 of file floor\+\_\+sensor\+\_\+logic.\+c.
+
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{floor__sensor__logic_8h_a0062fd80d9b82e8d1dc094e48dd67fb3}\label{floor__sensor__logic_8h_a0062fd80d9b82e8d1dc094e48dd67fb3}} 
+\index{floor\+\_\+sensor\+\_\+logic.\+h@{floor\+\_\+sensor\+\_\+logic.\+h}!current\+\_\+floor\+\_\+pointer@{current\+\_\+floor\+\_\+pointer}}
+\index{current\+\_\+floor\+\_\+pointer@{current\+\_\+floor\+\_\+pointer}!floor\+\_\+sensor\+\_\+logic.\+h@{floor\+\_\+sensor\+\_\+logic.\+h}}
+\subsubsection{\texorpdfstring{current\+\_\+floor\+\_\+pointer}{current\_floor\_pointer}}
+{\footnotesize\ttfamily float$\ast$ current\+\_\+floor\+\_\+pointer}
+
+Pointer to the current floor. 
+
+Definition at line 22 of file floor\+\_\+sensor\+\_\+logic.\+h.
+

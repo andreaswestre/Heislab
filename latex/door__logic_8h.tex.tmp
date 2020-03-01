@@ -1,0 +1,41 @@
+\hypertarget{door__logic_8h}{}\section{source/door\+\_\+logic.h File Reference}
+\label{door__logic_8h}\index{source/door\+\_\+logic.\+h@{source/door\+\_\+logic.\+h}}
+
+
+Manages the open door signal and wait times.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}hardware.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}queue\+\_\+logic.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}floor\+\_\+sensor\+\_\+logic.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}emergency\+\_\+stop\+\_\+logic.\+h\char`\"{}}\newline
+Include dependency graph for door\+\_\+logic.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{door__logic_8h_aaa4b546900a44b12b91be19f6c11601c}\label{door__logic_8h_aaa4b546900a44b12b91be19f6c11601c}} 
+void {\bfseries set\+Timeout} ()
+\item 
+\mbox{\Hypertarget{door__logic_8h_a423745a554b7b74fd8a6ee276f3ee4f6}\label{door__logic_8h_a423745a554b7b74fd8a6ee276f3ee4f6}} 
+void \hyperlink{door__logic_8h_a423745a554b7b74fd8a6ee276f3ee4f6}{open\+\_\+door} ()
+\begin{DoxyCompactList}\small\item\em Sets open door signal. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{door__logic_8h_aa92fc25e9030245f654b9e844a238199}\label{door__logic_8h_aa92fc25e9030245f654b9e844a238199}} 
+int \hyperlink{door__logic_8h_aa92fc25e9030245f654b9e844a238199}{obstruction}
+\begin{DoxyCompactList}\small\item\em Starts a timer loop of 3 seconds. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{door__logic_8h_a90f8dc502eab0e7eb426e1f5d333b08d}\label{door__logic_8h_a90f8dc502eab0e7eb426e1f5d333b08d}} 
+int $\ast$ {\bfseries obstruction\+\_\+pointer}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Manages the open door signal and wait times. 
+

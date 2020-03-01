@@ -1,0 +1,242 @@
+\hypertarget{queue__logic_8h}{}\section{source/queue\+\_\+logic.h File Reference}
+\label{queue__logic_8h}\index{source/queue\+\_\+logic.\+h@{source/queue\+\_\+logic.\+h}}
+
+
+Logic setup for elevator queue system.  
+
+
+{\ttfamily \#include \char`\"{}hardware.\+h\char`\"{}}\newline
+Include dependency graph for queue\+\_\+logic.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structorder__status}{order\+\_\+status}
+\begin{DoxyCompactList}\small\item\em Types of order for each floor. Used in {\ttfamily order\+\_\+array}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{queue__logic_8h_a71d4cee62dc1c9f8732efc91d5978f2d}\label{queue__logic_8h_a71d4cee62dc1c9f8732efc91d5978f2d}} 
+void {\bfseries starting\+\_\+procedure} (float $\ast$\hyperlink{floor__sensor__logic_8h_a0062fd80d9b82e8d1dc094e48dd67fb3}{current\+\_\+floor\+\_\+pointer}, int $\ast$\hyperlink{queue__logic_8h_a1d074b8f2bb239405f636826b2c087c3}{end\+\_\+floor\+\_\+pointer})
+\item 
+int \hyperlink{queue__logic_8h_acf6ac8b21af9421fc2588d1512046d9d}{add\+\_\+orders} (\hyperlink{structorder__status}{order\+\_\+status} $\ast$order\+\_\+array\+\_\+pointer)
+\begin{DoxyCompactList}\small\item\em adds orders to the order array. \end{DoxyCompactList}\item 
+void \hyperlink{queue__logic_8h_a2f0ad8de4fca8a99b758937325c9a512}{set\+\_\+end\+\_\+floor} (int $\ast$\hyperlink{queue__logic_8h_a1d074b8f2bb239405f636826b2c087c3}{end\+\_\+floor\+\_\+pointer}, \hyperlink{structorder__status}{order\+\_\+status} $\ast$order\+\_\+array\+\_\+pointer, int \hyperlink{queue__logic_8h_a4d7deb15e280e9370b8f1b0f14635ac9}{current\+\_\+direction})
+\begin{DoxyCompactList}\small\item\em Updates end floor. \end{DoxyCompactList}\item 
+void \hyperlink{queue__logic_8h_a4b8dd21362bcac7be9aeccc80b9e28d1}{set\+\_\+current\+\_\+direction} (int \hyperlink{queue__logic_8h_a2af0c9a11fefb6f922d484568f1c7eb4}{end\+\_\+floor}, float \hyperlink{floor__sensor__logic_8h_a999dc85985ad4dc5c2c10a52c02b2bb4}{current\+\_\+floor}, int $\ast$\hyperlink{queue__logic_8h_aa2dcdca19cc14ed1fce8832113f342f1}{current\+\_\+direction\+\_\+pointer})
+\begin{DoxyCompactList}\small\item\em sets current direction. \end{DoxyCompactList}\item 
+int \hyperlink{queue__logic_8h_a51b56b57fac4178b9c8b3f5caeda3013}{set\+\_\+movement} (int \hyperlink{queue__logic_8h_a4d7deb15e280e9370b8f1b0f14635ac9}{current\+\_\+direction})
+\begin{DoxyCompactList}\small\item\em sets movement direction of elevator to up, down or standstill. \end{DoxyCompactList}\item 
+void \hyperlink{queue__logic_8h_a3603a71b824ca1e6e95dc432ba493984}{set\+\_\+above\+\_\+or\+\_\+below} (int $\ast$\hyperlink{queue__logic_8h_a8ca1226129c9a3274c35535ca40c1bfe}{above\+\_\+or\+\_\+below\+\_\+pointer}, int \hyperlink{queue__logic_8h_a4d7deb15e280e9370b8f1b0f14635ac9}{current\+\_\+direction})
+\begin{DoxyCompactList}\small\item\em sets above or below to 1 if leaving floor going up, or 0 if leaving floor going down. \end{DoxyCompactList}\item 
+int \hyperlink{queue__logic_8h_a40511ddefcb46cb3a8e15e68dcb22619}{stop\+\_\+at\+\_\+floor} (float \hyperlink{floor__sensor__logic_8h_a999dc85985ad4dc5c2c10a52c02b2bb4}{current\+\_\+floor}, int \hyperlink{queue__logic_8h_a2af0c9a11fefb6f922d484568f1c7eb4}{end\+\_\+floor}, \hyperlink{structorder__status}{order\+\_\+status} $\ast$order\+\_\+array\+\_\+pointer)
+\begin{DoxyCompactList}\small\item\em Stops the elevator on floors with current orders. \end{DoxyCompactList}\item 
+void \hyperlink{queue__logic_8h_a0e5ebbd8bae475991e9a9cbfa3f83362}{remove\+\_\+orders} (float \hyperlink{floor__sensor__logic_8h_a999dc85985ad4dc5c2c10a52c02b2bb4}{current\+\_\+floor}, \hyperlink{structorder__status}{order\+\_\+status} $\ast$order\+\_\+array\+\_\+pointer)
+\begin{DoxyCompactList}\small\item\em Removes orders on current floor if elevator has stopped. \end{DoxyCompactList}\item 
+void \hyperlink{queue__logic_8h_a86b8a8c444dea56956bc902139e1130d}{set\+\_\+order\+\_\+lights} (\hyperlink{structorder__status}{order\+\_\+status} $\ast$order\+\_\+array\+\_\+pointer)
+\begin{DoxyCompactList}\small\item\em Sets order lights on buttons corresponding to unadressed orders. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{queue__logic_8h_a6e2e72ed5c1d54eb584cf875db3b01eb}\label{queue__logic_8h_a6e2e72ed5c1d54eb584cf875db3b01eb}} 
+\hyperlink{structorder__status}{order\+\_\+status} \hyperlink{queue__logic_8h_a6e2e72ed5c1d54eb584cf875db3b01eb}{order\+\_\+array} \mbox{[}4\mbox{]}
+\begin{DoxyCompactList}\small\item\em Array of 4 {\ttfamily \hyperlink{structorder__status}{order\+\_\+status}}, one element for each floor. Keeps track of all current orders. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{queue__logic_8h_a2af0c9a11fefb6f922d484568f1c7eb4}\label{queue__logic_8h_a2af0c9a11fefb6f922d484568f1c7eb4}} 
+int \hyperlink{queue__logic_8h_a2af0c9a11fefb6f922d484568f1c7eb4}{end\+\_\+floor}
+\begin{DoxyCompactList}\small\item\em The farthest floor with a current order in the direction of movement. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{queue__logic_8h_a1d074b8f2bb239405f636826b2c087c3}\label{queue__logic_8h_a1d074b8f2bb239405f636826b2c087c3}} 
+int $\ast$ \hyperlink{queue__logic_8h_a1d074b8f2bb239405f636826b2c087c3}{end\+\_\+floor\+\_\+pointer}
+\begin{DoxyCompactList}\small\item\em Pointer to end floor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{queue__logic_8h_a4d7deb15e280e9370b8f1b0f14635ac9}\label{queue__logic_8h_a4d7deb15e280e9370b8f1b0f14635ac9}} 
+int \hyperlink{queue__logic_8h_a4d7deb15e280e9370b8f1b0f14635ac9}{current\+\_\+direction}
+\begin{DoxyCompactList}\small\item\em current direction of movement. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{queue__logic_8h_aa2dcdca19cc14ed1fce8832113f342f1}\label{queue__logic_8h_aa2dcdca19cc14ed1fce8832113f342f1}} 
+int $\ast$ \hyperlink{queue__logic_8h_aa2dcdca19cc14ed1fce8832113f342f1}{current\+\_\+direction\+\_\+pointer}
+\begin{DoxyCompactList}\small\item\em pointer to current direction. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{queue__logic_8h_ab0d4cccd67bb6f6991832bdb360c63e7}\label{queue__logic_8h_ab0d4cccd67bb6f6991832bdb360c63e7}} 
+int \hyperlink{queue__logic_8h_ab0d4cccd67bb6f6991832bdb360c63e7}{above\+\_\+or\+\_\+below}
+\begin{DoxyCompactList}\small\item\em 1 if above floor, 0 if below. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{queue__logic_8h_a8ca1226129c9a3274c35535ca40c1bfe}\label{queue__logic_8h_a8ca1226129c9a3274c35535ca40c1bfe}} 
+int $\ast$ \hyperlink{queue__logic_8h_a8ca1226129c9a3274c35535ca40c1bfe}{above\+\_\+or\+\_\+below\+\_\+pointer}
+\begin{DoxyCompactList}\small\item\em pointer to above or below variable. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Logic setup for elevator queue system. 
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{queue__logic_8h_acf6ac8b21af9421fc2588d1512046d9d}\label{queue__logic_8h_acf6ac8b21af9421fc2588d1512046d9d}} 
+\index{queue\+\_\+logic.\+h@{queue\+\_\+logic.\+h}!add\+\_\+orders@{add\+\_\+orders}}
+\index{add\+\_\+orders@{add\+\_\+orders}!queue\+\_\+logic.\+h@{queue\+\_\+logic.\+h}}
+\subsubsection{\texorpdfstring{add\+\_\+orders()}{add\_orders()}}
+{\footnotesize\ttfamily int add\+\_\+orders (\begin{DoxyParamCaption}\item[{\hyperlink{structorder__status}{order\+\_\+status} $\ast$}]{order\+\_\+array\+\_\+pointer }\end{DoxyParamCaption})}
+
+
+
+adds orders to the order array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em order\+\_\+array\+\_\+pointer} & pointer to {\ttfamily \hyperlink{structorder__status}{order\+\_\+status}}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if new order added, 0 otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line 112 of file queue\+\_\+logic.\+c.
+
+\mbox{\Hypertarget{queue__logic_8h_a0e5ebbd8bae475991e9a9cbfa3f83362}\label{queue__logic_8h_a0e5ebbd8bae475991e9a9cbfa3f83362}} 
+\index{queue\+\_\+logic.\+h@{queue\+\_\+logic.\+h}!remove\+\_\+orders@{remove\+\_\+orders}}
+\index{remove\+\_\+orders@{remove\+\_\+orders}!queue\+\_\+logic.\+h@{queue\+\_\+logic.\+h}}
+\subsubsection{\texorpdfstring{remove\+\_\+orders()}{remove\_orders()}}
+{\footnotesize\ttfamily void remove\+\_\+orders (\begin{DoxyParamCaption}\item[{float}]{current\+\_\+floor,  }\item[{\hyperlink{structorder__status}{order\+\_\+status} $\ast$}]{order\+\_\+array\+\_\+pointer }\end{DoxyParamCaption})}
+
+
+
+Removes orders on current floor if elevator has stopped. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em current\+\_\+floor} & The current floor. \\
+\hline
+{\em order\+\_\+array\+\_\+pointer} & pointer to the order array. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 157 of file queue\+\_\+logic.\+c.
+
+\mbox{\Hypertarget{queue__logic_8h_a3603a71b824ca1e6e95dc432ba493984}\label{queue__logic_8h_a3603a71b824ca1e6e95dc432ba493984}} 
+\index{queue\+\_\+logic.\+h@{queue\+\_\+logic.\+h}!set\+\_\+above\+\_\+or\+\_\+below@{set\+\_\+above\+\_\+or\+\_\+below}}
+\index{set\+\_\+above\+\_\+or\+\_\+below@{set\+\_\+above\+\_\+or\+\_\+below}!queue\+\_\+logic.\+h@{queue\+\_\+logic.\+h}}
+\subsubsection{\texorpdfstring{set\+\_\+above\+\_\+or\+\_\+below()}{set\_above\_or\_below()}}
+{\footnotesize\ttfamily void set\+\_\+above\+\_\+or\+\_\+below (\begin{DoxyParamCaption}\item[{int $\ast$}]{above\+\_\+or\+\_\+below\+\_\+pointer,  }\item[{int}]{current\+\_\+direction }\end{DoxyParamCaption})}
+
+
+
+sets above or below to 1 if leaving floor going up, or 0 if leaving floor going down. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em above\+\_\+or\+\_\+below\+\_\+pointer} & pointer to above or below \\
+\hline
+{\em current\+\_\+direction} & current direction of movement. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 98 of file queue\+\_\+logic.\+c.
+
+\mbox{\Hypertarget{queue__logic_8h_a4b8dd21362bcac7be9aeccc80b9e28d1}\label{queue__logic_8h_a4b8dd21362bcac7be9aeccc80b9e28d1}} 
+\index{queue\+\_\+logic.\+h@{queue\+\_\+logic.\+h}!set\+\_\+current\+\_\+direction@{set\+\_\+current\+\_\+direction}}
+\index{set\+\_\+current\+\_\+direction@{set\+\_\+current\+\_\+direction}!queue\+\_\+logic.\+h@{queue\+\_\+logic.\+h}}
+\subsubsection{\texorpdfstring{set\+\_\+current\+\_\+direction()}{set\_current\_direction()}}
+{\footnotesize\ttfamily void set\+\_\+current\+\_\+direction (\begin{DoxyParamCaption}\item[{int}]{end\+\_\+floor,  }\item[{float}]{current\+\_\+floor,  }\item[{int $\ast$}]{current\+\_\+direction\+\_\+pointer }\end{DoxyParamCaption})}
+
+
+
+sets current direction. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em end\+\_\+floor} & the curret end floor. \\
+\hline
+{\em current\+\_\+floor} & the current floor. \\
+\hline
+{\em current\+\_\+direction\+\_\+pointer} & pointer to current direction. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 61 of file queue\+\_\+logic.\+c.
+
+\mbox{\Hypertarget{queue__logic_8h_a2f0ad8de4fca8a99b758937325c9a512}\label{queue__logic_8h_a2f0ad8de4fca8a99b758937325c9a512}} 
+\index{queue\+\_\+logic.\+h@{queue\+\_\+logic.\+h}!set\+\_\+end\+\_\+floor@{set\+\_\+end\+\_\+floor}}
+\index{set\+\_\+end\+\_\+floor@{set\+\_\+end\+\_\+floor}!queue\+\_\+logic.\+h@{queue\+\_\+logic.\+h}}
+\subsubsection{\texorpdfstring{set\+\_\+end\+\_\+floor()}{set\_end\_floor()}}
+{\footnotesize\ttfamily void set\+\_\+end\+\_\+floor (\begin{DoxyParamCaption}\item[{int $\ast$}]{end\+\_\+floor\+\_\+pointer,  }\item[{\hyperlink{structorder__status}{order\+\_\+status} $\ast$}]{order\+\_\+array\+\_\+pointer,  }\item[{int}]{current\+\_\+direction }\end{DoxyParamCaption})}
+
+
+
+Updates end floor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em end\+\_\+floor\+\_\+pointer} & pointer to the current end floor. \\
+\hline
+{\em order\+\_\+array\+\_\+pointer} & pointer to the order array. \\
+\hline
+{\em current\+\_\+floor} & The current floor. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 41 of file queue\+\_\+logic.\+c.
+
+\mbox{\Hypertarget{queue__logic_8h_a51b56b57fac4178b9c8b3f5caeda3013}\label{queue__logic_8h_a51b56b57fac4178b9c8b3f5caeda3013}} 
+\index{queue\+\_\+logic.\+h@{queue\+\_\+logic.\+h}!set\+\_\+movement@{set\+\_\+movement}}
+\index{set\+\_\+movement@{set\+\_\+movement}!queue\+\_\+logic.\+h@{queue\+\_\+logic.\+h}}
+\subsubsection{\texorpdfstring{set\+\_\+movement()}{set\_movement()}}
+{\footnotesize\ttfamily int set\+\_\+movement (\begin{DoxyParamCaption}\item[{int}]{current\+\_\+direction }\end{DoxyParamCaption})}
+
+
+
+sets movement direction of elevator to up, down or standstill. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em current\+\_\+direction} & the current direction of movement. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 77 of file queue\+\_\+logic.\+c.
+
+\mbox{\Hypertarget{queue__logic_8h_a86b8a8c444dea56956bc902139e1130d}\label{queue__logic_8h_a86b8a8c444dea56956bc902139e1130d}} 
+\index{queue\+\_\+logic.\+h@{queue\+\_\+logic.\+h}!set\+\_\+order\+\_\+lights@{set\+\_\+order\+\_\+lights}}
+\index{set\+\_\+order\+\_\+lights@{set\+\_\+order\+\_\+lights}!queue\+\_\+logic.\+h@{queue\+\_\+logic.\+h}}
+\subsubsection{\texorpdfstring{set\+\_\+order\+\_\+lights()}{set\_order\_lights()}}
+{\footnotesize\ttfamily void set\+\_\+order\+\_\+lights (\begin{DoxyParamCaption}\item[{\hyperlink{structorder__status}{order\+\_\+status} $\ast$}]{order\+\_\+array\+\_\+pointer }\end{DoxyParamCaption})}
+
+
+
+Sets order lights on buttons corresponding to unadressed orders. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em order\+\_\+array\+\_\+pointer} & pointer to the order array. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 165 of file queue\+\_\+logic.\+c.
+
+\mbox{\Hypertarget{queue__logic_8h_a40511ddefcb46cb3a8e15e68dcb22619}\label{queue__logic_8h_a40511ddefcb46cb3a8e15e68dcb22619}} 
+\index{queue\+\_\+logic.\+h@{queue\+\_\+logic.\+h}!stop\+\_\+at\+\_\+floor@{stop\+\_\+at\+\_\+floor}}
+\index{stop\+\_\+at\+\_\+floor@{stop\+\_\+at\+\_\+floor}!queue\+\_\+logic.\+h@{queue\+\_\+logic.\+h}}
+\subsubsection{\texorpdfstring{stop\+\_\+at\+\_\+floor()}{stop\_at\_floor()}}
+{\footnotesize\ttfamily int stop\+\_\+at\+\_\+floor (\begin{DoxyParamCaption}\item[{float}]{current\+\_\+floor,  }\item[{int}]{end\+\_\+floor,  }\item[{\hyperlink{structorder__status}{order\+\_\+status} $\ast$}]{order\+\_\+array\+\_\+pointer }\end{DoxyParamCaption})}
+
+
+
+Stops the elevator on floors with current orders. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em current\+\_\+floor} & The current floor. \\
+\hline
+{\em end\+\_\+floor} & The current end floor. \\
+\hline
+{\em order\+\_\+array\+\_\+pointer} & pointer to the order array. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 137 of file queue\+\_\+logic.\+c.
+
