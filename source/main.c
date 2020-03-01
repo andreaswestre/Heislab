@@ -46,8 +46,7 @@ hardware_command_movement(HARDWARE_MOVEMENT_DOWN);    //When program starts, ele
         }
         
         
-
-        
+ 
 
      if((new_floor_registered(current_floor_pointer))){                  //triggers when elevator reaches new floor.
         if(stop_at_floor(current_floor,end_floor,order_array)){        //Checks if elevator should stop at the floor.

@@ -85,15 +85,18 @@ void emergency_stop_mode(order_status *order_array, float *current_floor_pointer
             if (currently_at_floor(*current_direction_pointer))
             {
                 open_door();
+                set_movement(current_direction);
+                set_above_or_below(above_or_below_pointer, current_direction);
+
                 leave_stop_mode = 1;
                 break;
             }
             if (add_orders(order_array))
             {
                 leave_stop_mode = 1;
+                exit_emergency_stop_mode(order_array, *current_floor_pointer, end_floor_pointer, current_direction_pointer);
                 break;
             }
         }
     }
-    exit_emergency_stop_mode(order_array, *current_floor_pointer, end_floor_pointer, current_direction_pointer);
 }

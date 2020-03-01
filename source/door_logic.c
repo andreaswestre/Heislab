@@ -30,6 +30,7 @@ void setTimeout()
             remove_orders(current_floor, order_array);
             set_order_lights(order_array);
             set_end_floor(end_floor_pointer, order_array, current_direction);
+            set_current_direction(end_floor, current_floor, current_direction_pointer);
         }
         if (hardware_read_obstruction_signal())
         {
@@ -38,11 +39,13 @@ void setTimeout()
             if (hardware_read_stop_signal())
             {
                 *stop_pointer = 1;
+                *current_direction_pointer = 0;
                 break;
             }
         }
         if (hardware_read_stop_signal())
         {
+            *current_direction_pointer = 0;
             *stop_pointer = 1;
             break;
         }
@@ -62,18 +65,16 @@ void open_door()
         {
             if (*stop_pointer)
             {
-                *stop_pointer = 0;
                 break;
             }
             *obstruction_pointer = 0;
             setTimeout();
         }
-        if (!*stop_pointer)
+        if (!*stop_pointer && !hardware_read_obstruction_signal())
         {
-            printf("cutgiarega");
-            set_current_direction(end_floor, current_floor, current_direction_pointer);
             *stop_pointer = 0;
+            hardware_command_door_open(0);
         }
-        hardware_command_door_open(0);
+        *stop_pointer = 0;
     }
 }
